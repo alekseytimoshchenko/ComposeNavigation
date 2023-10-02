@@ -34,23 +34,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.krokosha.feature_about.AboutScreen
-import com.krokosha.feature_about.AboutViewModel
-import com.krokosha.feature_article.ArticleScreen
-import com.krokosha.feature_article.ArticleViewModel
-import com.krokosha.feature_articles.ArticlesScreen
-import com.krokosha.feature_articles.ArticlesViewModel
-import com.krokosha.feature_settings.SettingsScreen
-import com.krokosha.feature_settings.SettingsViewModel
+import com.krokosha.core_ui.MainRoute
+import com.krokosha.feature_about.aboutScreen
+import com.krokosha.feature_article.articleScreen
+import com.krokosha.feature_articles.articlesScreen
+import com.krokosha.feature_settings.settingsScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-
-enum class MainRoute(value: String) {
-    Articles("articles"),
-    Article("article"),
-    About("about"),
-    Settings("settings")
-}
 
 private data class DrawerMenu(val icon: ImageVector, val title: String, val route: String)
 
@@ -117,27 +107,11 @@ fun MainNavigation(
         }
     ) {
         NavHost(navController = navController, startDestination = MainRoute.Articles.name) {
-            composable(MainRoute.Articles.name) {
-                val vm: ArticlesViewModel = hiltViewModel()
-                ArticlesScreen(vm = vm, drawerState)
-            }
-            composable(MainRoute.About.name) {
-                val vm: AboutViewModel = hiltViewModel()
-                AboutScreen(vm = vm, drawerState)
-            }
-            composable(MainRoute.Settings.name) {
-                val vm: SettingsViewModel = hiltViewModel()
-                SettingsScreen(vm = vm,  drawerState)
-            }
-            composable(MainRoute.Article.name) {
-                val viewModel: ArticleViewModel = hiltViewModel()
-
-                ArticleScreen(
-                    viewModel = viewModel,
-                    drawerState = drawerState,
-                ) {
-                    navController.navigateUp()
-                }
+            articlesScreen(drawerState = drawerState)
+            aboutScreen(drawerState = drawerState)
+            settingsScreen(drawerState = drawerState)
+            articleScreen(drawerState = drawerState) {
+                navController.navigateUp()
             }
         }
     }

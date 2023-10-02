@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import com.krokosha.core_ui.CustomAppBar
 
 @Composable
-fun ArticleScreen(
+internal  fun ArticleScreen(
     viewModel: ArticleViewModel,
     drawerState: DrawerState,
     onNavigateBack: () -> Unit

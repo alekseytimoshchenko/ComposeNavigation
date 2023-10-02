@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import com.krokosha.core_ui.CustomAppBar
 
 @Composable
-fun AboutScreen(
+internal fun AboutScreen(
     vm: AboutViewModel,
     drawerState: DrawerState
 ) {
