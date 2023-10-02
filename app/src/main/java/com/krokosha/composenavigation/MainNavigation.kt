@@ -32,9 +32,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.krokosha.composenavigation.screens.AboutScreen
-import com.krokosha.composenavigation.screens.ArticlesScreen
-import com.krokosha.composenavigation.screens.SettingsScreen
+import com.krokosha.feature_about.AboutScreen
+import com.krokosha.feature_articles.ArticlesScreen
+import com.krokosha.feature_settings.SettingsScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

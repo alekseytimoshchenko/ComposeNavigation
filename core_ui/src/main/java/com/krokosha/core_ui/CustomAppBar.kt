@@ -1,4 +1,4 @@
-package com.krokosha.composenavigation
+package com.krokosha.core_ui
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu

@@ -15,4 +15,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "ComposeNavigation"
 include(":app")
- 
+include(":core_ui")
+include(":feature_settings")
+include(":feature_articles")
+include(":feature_about")
+include(":feature_article")

@@ -1,4 +1,4 @@
-package com.krokosha.composenavigation.screens
+package com.krokosha.feature_about
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,12 +10,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.krokosha.composenavigation.CustomAppBar
+import com.krokosha.core_ui.CustomAppBar
 
 @Composable
 fun AboutScreen(drawerState: DrawerState) {
     Scaffold(
-        topBar = { CustomAppBar(drawerState = drawerState, title = "About Us")}
+        topBar = { CustomAppBar(drawerState = drawerState, title = "About Us") }
     ) { paddingValues ->
         Column(
             modifier = Modifier.padding(paddingValues).fillMaxSize(),

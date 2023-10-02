@@ -1,4 +1,4 @@
-package com.krokosha.composenavigation.screens
+package com.krokosha.feature_settings
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,32 +10,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.krokosha.composenavigation.CustomAppBar
-import com.krokosha.composenavigation.ui.theme.ComposeNavigationTheme
+import com.krokosha.core_ui.CustomAppBar
 
 @Composable
-fun ArticlesScreen(drawerState: DrawerState) {
+fun SettingsScreen(drawerState: DrawerState) {
     Scaffold(
-        topBar = { CustomAppBar(
-            drawerState = drawerState,
-            title = "Articles"
-        ) }
+        topBar = { CustomAppBar(drawerState = drawerState, title = "Settings") }
     ) { paddingValues ->
         Column(
             modifier = Modifier.fillMaxSize().padding(paddingValues),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(text = " Articles Screen")
+            Text(text = " Settings Screen")
         }
-    }
-}
-
-@Preview(widthDp = 300)
-@Composable
-fun PreviewCustomAppBar() {
-    ComposeNavigationTheme {
-        CustomAppBar(drawerState = null, title = "Title")
     }
 }
