@@ -1,8 +1,12 @@
 package com.krokosha.core_ui
 
-enum class MainRoute(value: String) {
-    Articles("articles"),
-    Article("article"),
-    About("about"),
-    Settings("settings")
+sealed class MainRoute(val value: String) {
+    data class Article(val articleId: String): MainRoute("article/{$articleId}") {
+        companion object {
+            const val navigationValue = "article/{articleIdArg}"
+        }
+    }
+    object Articles: MainRoute("article")
+    object About: MainRoute("about")
+    object Settings: MainRoute("settings")
 }

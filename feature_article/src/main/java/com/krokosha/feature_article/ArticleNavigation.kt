@@ -5,14 +5,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-
-private const val articleIdArg = "articleId"
+import com.krokosha.core_ui.MainRoute
 
 fun NavGraphBuilder.articleScreen(
     drawerState: DrawerState,
     onNavigateBack: () -> Unit
 ) {
-    composable("article/{$articleIdArg}") {
+    composable(MainRoute.Article.navigationValue) {
         val viewModel: ArticleViewModel = hiltViewModel()
         ArticleScreen(
             viewModel = viewModel,
@@ -23,5 +22,5 @@ fun NavGraphBuilder.articleScreen(
 }
 
 fun NavController.navigateToArticle(articleId: String) {
-    this.navigate("article/$articleId")
+    this.navigate(MainRoute.Article(articleId = articleId).value)
 }

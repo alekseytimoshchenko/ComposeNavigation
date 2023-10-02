@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import com.krokosha.core_ui.MainRoute
 
 fun NavGraphBuilder.aboutScreen(drawerState: DrawerState) {
-    composable(MainRoute.About.name) {
+    composable(MainRoute.About.value) {
         val viewModel: AboutViewModel = hiltViewModel()
         AboutScreen(
             vm = viewModel,
@@ -18,5 +18,5 @@ fun NavGraphBuilder.aboutScreen(drawerState: DrawerState) {
 }
 
 fun NavController.navigateToAboutScreen() {
-    this.navigate(MainRoute.About.name)
+    this.navigate(MainRoute.About.value)
 }

@@ -45,10 +45,10 @@ import kotlinx.coroutines.launch
 private data class DrawerMenu(val icon: ImageVector, val title: String, val route: String)
 
 private val menus = arrayOf(
-    DrawerMenu(Icons.Filled.Face, "Articles", MainRoute.Articles.name),
-    DrawerMenu(Icons.Filled.Settings, "Settings", MainRoute.Settings.name),
-    DrawerMenu(Icons.Filled.Info, "About Us", MainRoute.About.name),
-    DrawerMenu(Icons.Filled.ShoppingCart, "Article", MainRoute.Article.name)
+    DrawerMenu(Icons.Filled.Face, "Articles", MainRoute.Articles.value),
+    DrawerMenu(Icons.Filled.Settings, "Settings", MainRoute.Settings.value),
+    DrawerMenu(Icons.Filled.Info, "About Us", MainRoute.About.value),
+    DrawerMenu(Icons.Filled.ShoppingCart, "Article", MainRoute.Article(articleId = "fakeId").value)
 )
 
 @Composable
@@ -78,9 +78,7 @@ private fun DrawerContent(
                 label = { Text(text = it.title) },
                 icon = { Icon(imageVector = it.icon, contentDescription = null) },
                 selected = false,
-                onClick = {
-                    onMenuClick(it.route)
-                }
+                onClick = { onMenuClick(it.route) }
             )
         }
     }
@@ -106,7 +104,7 @@ fun MainNavigation(
             }
         }
     ) {
-        NavHost(navController = navController, startDestination = MainRoute.Articles.name) {
+        NavHost(navController = navController, startDestination = MainRoute.Articles.value) {
             articlesScreen(drawerState = drawerState)
             aboutScreen(drawerState = drawerState)
             settingsScreen(drawerState = drawerState)

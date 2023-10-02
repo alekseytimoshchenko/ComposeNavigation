@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import com.krokosha.core_ui.MainRoute
 
 fun NavGraphBuilder.settingsScreen(drawerState: DrawerState) {
-    composable(MainRoute.Settings.name) {
+    composable(MainRoute.Settings.value) {
         val viewModel: SettingsViewModel = hiltViewModel()
         SettingsScreen(
             vm = viewModel,
@@ -18,5 +18,5 @@ fun NavGraphBuilder.settingsScreen(drawerState: DrawerState) {
 }
 
 fun NavController.navigateToSettingsScreen() {
-    this.navigate(MainRoute.Settings.name)
+    this.navigate(MainRoute.Settings.value)
 }

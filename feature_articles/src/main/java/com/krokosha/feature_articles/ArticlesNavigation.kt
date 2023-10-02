@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import com.krokosha.core_ui.MainRoute
 
 fun NavGraphBuilder.articlesScreen(drawerState: DrawerState) {
-    composable(MainRoute.Articles.name) {
+    composable(MainRoute.Articles.value) {
         val viewModel: ArticlesViewModel = hiltViewModel()
         ArticlesScreen(
             vm = viewModel,
@@ -18,5 +18,5 @@ fun NavGraphBuilder.articlesScreen(drawerState: DrawerState) {
 }
 
 fun NavController.navigateToArticlesScreen() {
-    this.navigate(MainRoute.About.name)
+    this.navigate(MainRoute.About.value)
 }
