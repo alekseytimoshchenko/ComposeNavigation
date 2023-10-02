@@ -44,20 +44,6 @@ import com.krokosha.composenavigation.ui.theme.ComposeNavigationTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-enum class MainRoute(value: String) {
-    Articles("articles"),
-    About("about"),
-    Settings("settings")
-}
-
-data class DrawerMenu(val icon: ImageVector, val title: String, val route: String)
-
-val menus = arrayOf(
-    DrawerMenu(Icons.Filled.Face, "Articles", MainRoute.Articles.name),
-    DrawerMenu(Icons.Filled.Settings, "Settings", MainRoute.Settings.name),
-    DrawerMenu(Icons.Filled.Info, "About Us", MainRoute.About.name)
-)
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,75 +56,6 @@ class MainActivity : ComponentActivity() {
                     MainNavigation()
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun MainNavigation(
-    navController: NavHostController = rememberNavController(),
-    coroutineScope: CoroutineScope = rememberCoroutineScope(),
-    drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-) {
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        drawerContent = {
-            ModalDrawerSheet {
-                DrawerContent(menus) { route ->
-                    coroutineScope.launch { drawerState.close() }
-                    navController.navigate(route)
-                }
-            }
-        }
-    ) {
-        NavHost(
-            navController = navController,
-            startDestination = MainRoute.Articles.name
-        ) {
-            composable(MainRoute.Articles.name) {
-                ArticlesScreen(drawerState)
-            }
-            composable(MainRoute.About.name) {
-                ArticlesScreen(drawerState)
-//                AboutScreen(drawerState)
-            }
-            composable(MainRoute.Settings.name) {
-                ArticlesScreen(drawerState)
-//                SettingsScreen(drawerState)
-            }
-        }
-    }
-}
-
-@Composable
-private fun DrawerContent(
-    menus: Array<DrawerMenu>,
-    onMenuClick: (String) -> Unit
-) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                modifier = Modifier.size(150.dp),
-                imageVector = Icons.Filled.AccountCircle,
-                contentScale = ContentScale.Crop,
-                contentDescription = null
-            )
-        }
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        menus.forEach {
-            NavigationDrawerItem(
-                label = { Text(text = it.title) },
-                icon = { Icon(imageVector = it.icon, contentDescription = null) },
-                selected = false,
-                onClick = { onMenuClick(it.route) }
-            )
         }
     }
 }
