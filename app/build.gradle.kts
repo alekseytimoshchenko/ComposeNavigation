@@ -1,6 +1,10 @@
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -26,24 +30,32 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+
+    // Java
+    java.toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+        // Optional: vendor.set(JvmVendorSpec.[VENDOR])
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+
     buildFeatures {
         compose = true
+        buildConfig = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
 
 dependencies {
@@ -72,4 +84,9 @@ dependencies {
 //    implementation(platform('androidx.compose:compose-bom:2022.10.00'))
     implementation("androidx.navigation:navigation-compose:2.7.3")
     implementation("androidx.compose.material3:material3:1.1.2")
+
+    implementation("com.google.dagger:hilt-android:2.47")
+    kapt("com.google.dagger:hilt-android-compiler:2.47")
+    implementation("androidx.navigation:navigation-compose:2.7.3")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 }

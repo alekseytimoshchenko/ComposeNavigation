@@ -13,7 +13,10 @@ import androidx.compose.ui.Modifier
 import com.krokosha.core_ui.CustomAppBar
 
 @Composable
-fun SettingsScreen(drawerState: DrawerState) {
+fun SettingsScreen(
+    vm: SettingsViewModel,
+    drawerState: DrawerState
+) {
     Scaffold(
         topBar = { CustomAppBar(drawerState = drawerState, title = "Settings") }
     ) { paddingValues ->

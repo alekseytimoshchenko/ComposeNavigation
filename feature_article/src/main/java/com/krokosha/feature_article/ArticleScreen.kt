@@ -1,4 +1,4 @@
-package com.krokosha.feature_articles
+package com.krokosha.feature_article
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,22 +13,21 @@ import androidx.compose.ui.Modifier
 import com.krokosha.core_ui.CustomAppBar
 
 @Composable
-fun ArticlesScreen(
-    vm: ArticlesViewModel,
-    drawerState: DrawerState
+fun ArticleScreen(
+    viewModel: ArticleViewModel,
+    drawerState: DrawerState,
+    onNavigateBack: () -> Unit
 ) {
     Scaffold(
-        topBar = { CustomAppBar(
-            drawerState = drawerState,
-            title = "Articles"
-        ) }
+        topBar = { CustomAppBar(drawerState = drawerState, title = "About Us") }
     ) { paddingValues ->
         Column(
-            modifier = Modifier.fillMaxSize().padding(paddingValues),
+            modifier = Modifier.padding(paddingValues).fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(text = " Articles Screen")
+            Text(text = "About Screen")
         }
     }
+
 }

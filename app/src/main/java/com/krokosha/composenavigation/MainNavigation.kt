@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
@@ -28,18 +29,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.krokosha.feature_about.AboutScreen
+import com.krokosha.feature_about.AboutViewModel
+import com.krokosha.feature_article.ArticleScreen
+import com.krokosha.feature_article.ArticleViewModel
 import com.krokosha.feature_articles.ArticlesScreen
+import com.krokosha.feature_articles.ArticlesViewModel
 import com.krokosha.feature_settings.SettingsScreen
+import com.krokosha.feature_settings.SettingsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 enum class MainRoute(value: String) {
     Articles("articles"),
+    Article("article"),
     About("about"),
     Settings("settings")
 }
@@ -49,7 +57,8 @@ private data class DrawerMenu(val icon: ImageVector, val title: String, val rout
 private val menus = arrayOf(
     DrawerMenu(Icons.Filled.Face, "Articles", MainRoute.Articles.name),
     DrawerMenu(Icons.Filled.Settings, "Settings", MainRoute.Settings.name),
-    DrawerMenu(Icons.Filled.Info, "About Us", MainRoute.About.name)
+    DrawerMenu(Icons.Filled.Info, "About Us", MainRoute.About.name),
+    DrawerMenu(Icons.Filled.ShoppingCart, "Article", MainRoute.Article.name)
 )
 
 @Composable
@@ -109,13 +118,26 @@ fun MainNavigation(
     ) {
         NavHost(navController = navController, startDestination = MainRoute.Articles.name) {
             composable(MainRoute.Articles.name) {
-                ArticlesScreen(drawerState)
+                val vm: ArticlesViewModel = hiltViewModel()
+                ArticlesScreen(vm = vm, drawerState)
             }
             composable(MainRoute.About.name) {
-                AboutScreen(drawerState)
+                val vm: AboutViewModel = hiltViewModel()
+                AboutScreen(vm = vm, drawerState)
             }
             composable(MainRoute.Settings.name) {
-                SettingsScreen(drawerState)
+                val vm: SettingsViewModel = hiltViewModel()
+                SettingsScreen(vm = vm,  drawerState)
+            }
+            composable(MainRoute.Article.name) {
+                val viewModel: ArticleViewModel = hiltViewModel()
+
+                ArticleScreen(
+                    viewModel = viewModel,
+                    drawerState = drawerState,
+                ) {
+                    navController.navigateUp()
+                }
             }
         }
     }
